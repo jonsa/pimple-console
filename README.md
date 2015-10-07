@@ -1,5 +1,11 @@
 # Pimple Console ServiceProvider
 
+## Installation
+Add the console provider to your ```composer.json``` using the command line.
+```
+composer require jonsa/pimple-console
+```
+
 ## Configuration
 ```php
 use Pimple\Container;
