@@ -1,0 +1,34 @@
+{
+    "name": "jonsa/pimple-console",
+    "description": "Pimple Console ServiceProvider",
+    "type": "library",
+    "require": {
+        "pimple/pimple": "~3.0",
+        "symfony/console": "^2.5",
+        "symfony/event-dispatcher": "^2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonas Sandstrom",
+            "email": "jonas@sandstrom.im"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Jonsa\\PimpleConsole\\": "src/PimpleConsole/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jonsa\\PimpleConsole\\Test\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
