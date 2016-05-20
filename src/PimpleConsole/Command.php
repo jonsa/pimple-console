@@ -1,4 +1,6 @@
-<?php namespace Jonsa\PimpleConsole;
+<?php
+
+namespace Jonsa\PimpleConsole;
 
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Helper\Table;
@@ -11,14 +13,12 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
- * Class Command
+ * Base command class with convenient helper methods.
  *
- * @package Jonsa\PimpleConsole
  * @author Jonas Sandström
  */
 abstract class Command extends SymfonyCommand
 {
-
     /**
      * The console command name.
      *
@@ -59,7 +59,7 @@ abstract class Command extends SymfonyCommand
      *
      * @return null|int null or 0 if everything went fine, or an error code
      */
-    protected abstract function handle();
+    abstract protected function handle();
 
     /**
      * {@inheritdoc}
@@ -83,14 +83,14 @@ abstract class Command extends SymfonyCommand
         foreach ($this->getArguments() as $arguments) {
             call_user_func_array(array(
                 $this,
-                'addArgument'
+                'addArgument',
             ), $arguments);
         }
 
         foreach ($this->getOptions() as $options) {
             call_user_func_array(array(
                 $this,
-                'addOption'
+                'addOption',
             ), $options);
         }
     }
@@ -114,11 +114,11 @@ abstract class Command extends SymfonyCommand
         return $this::handle();
     }
 
-
     /**
      * Get the console command arguments.
      *
      * @return array An array of arrays containing arguments matching the addArgument method
+     *
      * @see \Symfony\Component\Console\Command::addArgument()
      */
     protected function getArguments()
@@ -130,6 +130,7 @@ abstract class Command extends SymfonyCommand
      * Get the console command options.
      *
      * @return array An array of arrays containing arguments matching the addOption method
+     *
      * @see \Symfony\Component\Console\Command::addOption()
      */
     protected function getOptions()
@@ -146,7 +147,9 @@ abstract class Command extends SymfonyCommand
      */
     public function argument($key = null)
     {
-        if (is_null($key)) return $this->input->getArguments();
+        if (is_null($key)) {
+            return $this->input->getArguments();
+        }
 
         return $this->input->getArgument($key);
     }
@@ -160,7 +163,9 @@ abstract class Command extends SymfonyCommand
      */
     public function option($key = null)
     {
-        if (is_null($key)) return $this->input->getOptions();
+        if (is_null($key)) {
+            return $this->input->getOptions();
+        }
 
         return $this->input->getOption($key);
     }
@@ -366,5 +371,4 @@ abstract class Command extends SymfonyCommand
 
         $table->setHeaders($headers)->setRows($rows)->setStyle($style)->render();
     }
-
 }

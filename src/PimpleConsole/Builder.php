@@ -1,13 +1,14 @@
-<?php namespace Jonsa\PimpleConsole;
+<?php
+
+namespace Jonsa\PimpleConsole;
 
 use Pimple\Container;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class Bootstrapper
+ * Fluent interface to build a console application.
  *
- * @package Jonsa\PimpleConsole
  * @author Jonas Sandström
  */
 final class Builder
@@ -42,6 +43,7 @@ final class Builder
 
     /**
      * @param Container|null $container
+     *
      * @return Builder
      */
     public static function create(Container $container = null)
@@ -84,6 +86,7 @@ final class Builder
      * Set the console application name.
      *
      * @param string $name
+     *
      * @return $this
      */
     public function name($name)
@@ -97,6 +100,7 @@ final class Builder
      * Set the console application version.
      *
      * @param string $version
+     *
      * @return $this
      */
     public function version($version)
@@ -111,6 +115,7 @@ final class Builder
      * a dispatcher can be found in the container.
      *
      * @param string|EventDispatcherInterface $dispatcher
+     *
      * @return $this
      */
     public function dispatcher($dispatcher)
@@ -130,11 +135,12 @@ final class Builder
      * Enable XDebug support. Adds the --debug option to all commands.
      *
      * @param bool $enable
+     *
      * @return $this
      */
     public function xdebug($enable = true)
     {
-        $this->config['console.enable_xdebug'] = (bool)$enable;
+        $this->config['console.enable_xdebug'] = (bool) $enable;
 
         return $this;
     }
@@ -143,6 +149,7 @@ final class Builder
      * Add a command to the console application.
      *
      * @param SymfonyCommand $command
+     *
      * @return $this
      */
     public function add(SymfonyCommand $command)
@@ -167,5 +174,4 @@ final class Builder
 
         return $this;
     }
-
 }

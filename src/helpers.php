@@ -2,7 +2,7 @@
 
 if (!function_exists('poke_xdebug')) {
     /**
-     * Enable XDebug jit mode
+     * Enable XDebug jit mode.
      *
      * @param bool $trigger Trigger XDebug by calling a suppressed trigger_error
      *

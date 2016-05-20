@@ -1,23 +1,27 @@
-<?php namespace Jonsa\PimpleConsole\Event;
+<?php
+
+namespace Jonsa\PimpleConsole\Event;
 
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class InitializeConsoleEvent
+ * DTO which is dispatched when the console application is resolved out of the
+ * container.
  *
- * @package Jonsa\PimpleConsole
  * @author Jonas Sandström
  */
 class InitializeConsoleEvent extends Event
 {
-
     /**
      * @var ConsoleApplication
      */
     private $application;
 
-    function __construct(ConsoleApplication $application)
+    /**
+     * @param ConsoleApplication $application
+     */
+    public function __construct(ConsoleApplication $application)
     {
         $this->application = $application;
     }
@@ -29,5 +33,4 @@ class InitializeConsoleEvent extends Event
     {
         return $this->application;
     }
-
 }

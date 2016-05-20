@@ -1,4 +1,6 @@
-<?php namespace Jonsa\PimpleConsole;
+<?php
+
+namespace Jonsa\PimpleConsole;
 
 use Jonsa\PimpleConsole\Event\InitializeConsoleEvent;
 use Pimple\Container;
@@ -8,14 +10,12 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class ServiceProvider
+ * Register the console application with the container.
  *
- * @package Jonsa\PimpleConsole
  * @author Jonas Sandström
  */
 class ServiceProvider implements ServiceProviderInterface
 {
-
     /**
      * Registers services on the given container.
      *
@@ -64,5 +64,4 @@ class ServiceProvider implements ServiceProviderInterface
             return $console;
         };
     }
-
 }
