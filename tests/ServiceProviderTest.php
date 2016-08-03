@@ -69,4 +69,61 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $called);
     }
 
+    public function testItPokesXDebugWhenDebugFlagIsUsed()
+    {
+        if (!function_exists('xdebug_enable')) {
+            $this->markTestSkipped('XDebug is not present');
+        }
+
+        $message = '';
+        $backup = $_SERVER['argv'];
+
+        set_error_handler(function ($errno, $errstr) use (&$message) {
+            $message = $errstr;
+        });
+
+        $_SERVER['argv'][] = '--debug';
+
+        $container = new Container();
+        $container->register(new ServiceProvider(), array(
+            'console.enable_xdebug' => true,
+        ));
+
+        $container['console'];
+
+        restore_error_handler();
+        $_SERVER['argv'] = $backup;
+
+        $this->assertEquals("I'm poking that bear!", $message);
+    }
+
+    public function testItDoesNotPokeXDebugWhenDebugFlagIsAfterEndOfOptions()
+    {
+        if (!function_exists('xdebug_enable')) {
+            $this->markTestSkipped('XDebug is not present');
+        }
+
+        $message = '';
+        $backup = $_SERVER['argv'];
+
+        set_error_handler(function ($errno, $errstr) use (&$message) {
+            $message = $errstr;
+        });
+
+        $_SERVER['argv'][] = '--';
+        $_SERVER['argv'][] = '--debug';
+
+        $container = new Container();
+        $container->register(new ServiceProvider(), array(
+            'console.enable_xdebug' => true,
+        ));
+
+        $container['console'];
+
+        restore_error_handler();
+        $_SERVER['argv'] = $backup;
+
+        $this->assertEquals('', $message);
+    }
+
 }

@@ -45,8 +45,14 @@ class ServiceProvider implements ServiceProviderInterface
 
                 $console->setDefinition($definition);
 
-                if (in_array('--debug', $_SERVER['argv'], true)) {
-                    poke_xdebug();
+                foreach ($_SERVER['argv'] as $arg) {
+                    if ('--debug' === $arg) {
+                        poke_xdebug();
+
+                        break;
+                    } elseif ('--' === $arg) {
+                        break;
+                    }
                 }
             }
 
